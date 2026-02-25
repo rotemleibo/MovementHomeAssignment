@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MovementHomeAssignment.API;
+﻿namespace MovementHomeAssignment.API;
 
 public class RedisOptions
 {

@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MovementHomeAssignment.Abstract;
@@ -8,8 +7,6 @@ using MovementHomeAssignment.API.Services;
 using MovementHomeAssignment.Converters;
 using MovementHomeAssignment.DTOs;
 using MovementHomeAssignment.Infrastructure;
-using MovementHomeAssignment.Infrastructure.Data;
-using System;
 
 namespace MovementHomeAssignment;
 
@@ -25,8 +22,7 @@ public class Program
         builder.Services.AddSwaggerGen();
 
         // Add Infrastructure Services
-        builder.Services.Configure<InMemoryCacheOptions>(configuration.GetSection("InMemoryCache"));
-        builder.Services.AddSingleton<InMemoryCache<UserDto>>();
+        builder.Services.AddInMemoryCaches(configuration);
         builder.Services.AddRedis(configuration);
         builder.Services.AddMySql(configuration);
         builder.Services.AddScoped<UserConverter>();
