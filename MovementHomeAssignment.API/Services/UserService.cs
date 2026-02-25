@@ -36,26 +36,31 @@ public class UserService : IUserService
 
     public async Task<UserDto> GetUserById(int id, CancellationToken cancellationToken)
     {
-        var userDto = _inMemoryCache.Get(id);
+        var userDto = await _cacheService.GetAsync<UserDto>(id.ToString(), cancellationToken);
         if (userDto != null)
         {
+            //If data is found in the Redis Cache, return it immediately
             return userDto;
         }
 
-        userDto = await _cacheService.GetAsync<UserDto>(id.ToString(), cancellationToken);
+        //If not found in the Redis Cache, check the SDCS.
+        userDto = _inMemoryCache.Get(id);
         if (userDto != null)
         {
-            _inMemoryCache.Set(id, userDto);
+            //If found, return it and store it in the Redis Cache
+            await _cacheService.SetAsync(id.ToString(), userDto, cancellationToken);
             return userDto;
         }
 
+        //If not found in the SDCS, check the database.
         var user = await _userDal.GetUserByIdAsync(id, cancellationToken);
         if (user == null)
         {
             return null;
         }
-        userDto = _userConverter.ToUserDto(user);
 
+        //If found, return it and store it in both the SDCS and Redis Cache.
+        userDto = _userConverter.ToUserDto(user);
         _inMemoryCache.Set(id, userDto);
         await _cacheService.SetAsync(id.ToString(), userDto, cancellationToken);
 
