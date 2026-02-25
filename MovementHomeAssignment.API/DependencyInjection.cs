@@ -2,7 +2,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using MovementHomeAssignment.API.Abstract;
 using MovementHomeAssignment.API.Services;
-using StackExchange.Redis;
 
 namespace MovementHomeAssignment.API;
 
@@ -12,6 +11,8 @@ public static class DependencyInjection
     this IServiceCollection services,
     IConfiguration configuration)
     {
+        services.Configure<RedisOptions>(configuration.GetSection("RedisOptions"));
+
         var redisConnectionString = configuration.GetConnectionString("Redis");
 
         services.AddStackExchangeRedisCache(options =>
@@ -20,14 +21,6 @@ public static class DependencyInjection
         });
 
         services.AddScoped<ICacheService, RedisCacheService>();
-        services.AddScoped<RedisOptions>(sp =>
-        {
-            return new RedisOptions
-            {
-                TTL = configuration.GetValue<int>("Redis:TTL")
-            };
-        });
-
         return services;
     }
 }
