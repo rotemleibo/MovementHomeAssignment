@@ -30,9 +30,10 @@ public class UserController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<UserDto> Create(UserDto user)
+    public async Task<IActionResult> Create(UserDto user)
     {
-        var createdUser = await _userService.CreateUser(user);
-        return createdUser;
+        var createdUserId = await _userService.CreateUser(user);
+
+        return Ok(createdUserId);
     }
 }

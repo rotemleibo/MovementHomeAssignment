@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MovementHomeAssignment.Infrastructure\MovementHomeAssignment.Infrastructure.csproj" />
+    <ProjectReference Include="..\MovementHomeAssignment.MySQL\MovementHomeAssignment.MySQL.csproj" />
   </ItemGroup>
 
 </Project>

@@ -18,11 +18,11 @@ public class UserService : IUserService
         _userConverter = userConverter;
     }
 
-    public async Task<UserDto> CreateUser(UserDto userDto)
+    public async Task<int> CreateUser(UserDto userDto)
     {
         var createdUser = await _userDal.CreateUserAsync(_userConverter.ToUser(userDto));
 
-        return _userConverter.ToUserDto(createdUser);
+        return createdUser.Id;
     }
 
     public async Task<UserDto> GetUserById(int id, CancellationToken cancellationToken)
