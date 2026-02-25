@@ -46,7 +46,7 @@ Connection strings and cache settings are defined in `MovementHomeAssignment.API
     "Redis": "localhost:6379"
   },
   "RedisOptions": {
-    "TTL": 6
+    "TTL": 5
   },
   "InMemoryCache": {
     "Capacity": 3
