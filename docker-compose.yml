@@ -22,6 +22,15 @@ services:
       timeout: 5s
       retries: 5
 
+  redis:
+    image: redis:7.4
+    container_name: MovementHomeAssignmentRedis
+    ports:
+      - "6379:6379"
+    networks:
+      - movement_network
+    restart: unless-stopped
+
 volumes:
   mysql_data:
     driver: local
