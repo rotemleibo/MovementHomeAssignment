@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MovementHomeAssignment.API.Abstract;
+using MovementHomeAssignment.API.InMemory;
 using MovementHomeAssignment.API.Services;
 using MovementHomeAssignment.DTOs;
 

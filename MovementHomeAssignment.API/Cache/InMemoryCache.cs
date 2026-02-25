@@ -1,8 +1,9 @@
 ﻿using Microsoft.Extensions.Options;
+using MovementHomeAssignment.API.Cache;
 using System;
 using System.Collections.Generic;
 
-namespace MovementHomeAssignment.API.Services;
+namespace MovementHomeAssignment.API.InMemory;
 
 public class InMemoryCache<T>
     where T : class
@@ -14,7 +15,7 @@ public class InMemoryCache<T>
     private readonly int _capacity;
 
     private readonly Dictionary<int, T> _cache;
-    private readonly LinkedList<int> _linkedList;
+    private readonly CacheKeyLinkedList _linkedList;
 
     public InMemoryCache(IOptions<InMemoryCacheOptions> options)
     {
@@ -25,7 +26,7 @@ public class InMemoryCache<T>
 
         _capacity = options.Value.Capacity;
         _cache = new Dictionary<int, T>();
-        _linkedList = new LinkedList<int>();
+        _linkedList = new CacheKeyLinkedList();
     }
 
     public T Get(int key)
@@ -55,7 +56,7 @@ public class InMemoryCache<T>
             if (_linkedList.Count == _capacity)
             {
                 var last = _linkedList.Last;
-                _cache.Remove(last.Value);
+                _cache.Remove(last);
                 _linkedList.RemoveLast();
             }
 

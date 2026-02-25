@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using MovementHomeAssignment.API;
-using MovementHomeAssignment.API.Services;
+using MovementHomeAssignment.API.InMemory;
 using MovementHomeAssignment.DTOs;
 using System;
 
