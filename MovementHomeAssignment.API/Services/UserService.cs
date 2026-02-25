@@ -1,7 +1,6 @@
 ﻿using MovementHomeAssignment.Abstract;
 using MovementHomeAssignment.API.Abstract;
 using MovementHomeAssignment.API.InMemory;
-using MovementHomeAssignment.Converters;
 using MovementHomeAssignment.DTOs;
 using MovementHomeAssignment.Infrastructure.DAL.Abstract;
 using System.Threading;
@@ -13,11 +12,11 @@ public class UserService : IUserService
 {
     private readonly ICacheService _cacheService;
     private readonly IUserDal _userDal;
-    private readonly UserConverter _userConverter;
+    private readonly IUserConverter _userConverter;
     private readonly InMemoryCache<UserDto> _inMemoryCache;
     public UserService(
         IUserDal userDal,
-        UserConverter userConverter,
+        IUserConverter userConverter,
         ICacheService cacheService,
         InMemoryCache<UserDto> inMemoryCache)
     {

@@ -1,11 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MovementHomeAssignment.Abstract;
 using MovementHomeAssignment.API;
-using MovementHomeAssignment.API.Services;
-using MovementHomeAssignment.Converters;
-using MovementHomeAssignment.DTOs;
 using MovementHomeAssignment.Infrastructure;
 
 namespace MovementHomeAssignment;
@@ -25,8 +21,8 @@ public class Program
         builder.Services.AddInMemoryCaches(configuration);
         builder.Services.AddRedis(configuration);
         builder.Services.AddMySql(configuration);
-        builder.Services.AddScoped<UserConverter>();
-        builder.Services.AddScoped<IUserService, UserService>();
+        builder.Services.AddServices();
+        builder.Services.AddConnections();
 
         var app = builder.Build();
 

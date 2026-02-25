@@ -1,9 +1,10 @@
-﻿using MovementHomeAssignment.DTOs;
+﻿using MovementHomeAssignment.API.Abstract;
+using MovementHomeAssignment.DTOs;
 using MovementHomeAssignment.Infrastructure.Data;
 
 namespace MovementHomeAssignment.Converters;
 
-public class UserConverter
+public class UserConverter : IUserConverter
 {
     public User ToUser(UserDto userDto)
     {
