@@ -1,3 +1,4 @@
 <Solution>
-  <Project Path="MovementHomeAssignment/MovementHomeAssignment.csproj" />
+  <Project Path="MovementHomeAssignment.Infrastructure/MovementHomeAssignment.Infrastructure.csproj" Id="2ad5595a-9be6-44b0-b0a6-34b312630f13" />
+  <Project Path="MovementHomeAssignment/MovementHomeAssignment.API.csproj" />
 </Solution>
