@@ -1,4 +1,3 @@
-
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,10 +16,9 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
-
         builder.Services.AddControllers();
-        // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-        builder.Services.AddOpenApi();
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen();
 
         var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
         if (string.IsNullOrEmpty(connectionString))
@@ -28,7 +26,7 @@ public class Program
             throw new InvalidOperationException("Connection string 'DefaultConnection' not found in configuration.");
         }
 
-        // Application Services
+        // Add Infrastructure Services
         builder.Services.AddInfrastructure(connectionString);
         builder.Services.AddScoped<UserConverter>();
         builder.Services.AddScoped<IUserService, UserService>();
@@ -38,14 +36,16 @@ public class Program
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {
-            app.MapOpenApi();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "MovementHomeAssignment API V1");
+                c.RoutePrefix = "swagger";
+            });
         }
 
         app.UseHttpsRedirection();
-
         app.UseAuthorization();
-
-
         app.MapControllers();
 
         app.Run();

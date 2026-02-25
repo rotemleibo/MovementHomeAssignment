@@ -1,7 +1,6 @@
 ﻿using MovementHomeAssignment.Abstract;
 using MovementHomeAssignment.Converters;
 using MovementHomeAssignment.DTOs;
-using MovementHomeAssignment.Infrastructure.DAL;
 using MovementHomeAssignment.Infrastructure.DAL.Abstract;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,12 +14,13 @@ public class UserService : IUserService
 
     public UserService(IUserDal userDal, UserConverter userConverter)
     {
+        _userDal = userDal;
         _userConverter = userConverter;
     }
 
     public async Task<UserDto> CreateUser(UserDto userDto)
     {
-        var createdUser =  await _userDal.CreateUserAsync(_userConverter.ToUser(userDto));
+        var createdUser = await _userDal.CreateUserAsync(_userConverter.ToUser(userDto));
 
         return _userConverter.ToUserDto(createdUser);
     }

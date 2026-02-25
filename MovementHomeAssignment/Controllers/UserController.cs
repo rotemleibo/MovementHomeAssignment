@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using MovementHomeAssignment.Abstract;
 using MovementHomeAssignment.DTOs;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,9 +10,9 @@ namespace MovementHomeAssignment.Controllers;
 [Route("[controller]")]
 public class UserController : ControllerBase
 {
-    private readonly UserService _userService;
+    private readonly IUserService _userService;
 
-    public UserController(UserService userService)
+    public UserController(IUserService userService)
     {
         _userService = userService;
     }
