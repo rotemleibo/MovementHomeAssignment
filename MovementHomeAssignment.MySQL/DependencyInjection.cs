@@ -8,7 +8,7 @@ namespace MovementHomeAssignment.Infrastructure;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddInfrastructure(
+    public static IServiceCollection AddMySql(
         this IServiceCollection services,
         string connectionString)
     {

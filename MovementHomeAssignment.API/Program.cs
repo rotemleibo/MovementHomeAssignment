@@ -27,7 +27,7 @@ public class Program
         }
 
         // Add Infrastructure Services
-        builder.Services.AddInfrastructure(connectionString);
+        builder.Services.AddMySql(connectionString);
         builder.Services.AddScoped<UserConverter>();
         builder.Services.AddScoped<IUserService, UserService>();
 
