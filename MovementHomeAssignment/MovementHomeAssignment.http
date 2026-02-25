@@ -1,0 +1,6 @@
+@MovementHomeAssignment_HostAddress = http://localhost:5018
+
+GET {{MovementHomeAssignment_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
