@@ -1,4 +1,5 @@
 <Solution>
-  <Project Path="MovementHomeAssignment.MySQL/MovementHomeAssignment.MySQL.csproj" Id="2ad5595a-9be6-44b0-b0a6-34b312630f13" />
   <Project Path="MovementHomeAssignment.API/MovementHomeAssignment.API.csproj" />
+  <Project Path="MovementHomeAssignment.MySQL/MovementHomeAssignment.MySQL.csproj" Id="2ad5595a-9be6-44b0-b0a6-34b312630f13" />
+  <Project Path="MovementHomeAssignment.Tests/MovementHomeAssignment.Tests.csproj" Id="60fb55b0-646f-44a6-bcc2-bcee3e2186a6" />
 </Solution>
