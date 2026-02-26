@@ -20,6 +20,10 @@ public class Node
     /// </summary>
     public Node Previous { get; set; }
 
+    /// <summary>
+    /// Initializes a new instance of the Node class with the specified data.
+    /// </summary>
+    /// <param name="data">The cached key value.</param>
     public Node(int data)
     {
         Data = data;

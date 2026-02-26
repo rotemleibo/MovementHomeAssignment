@@ -7,7 +7,7 @@ using System;
 namespace MovementHomeAssignment.Tests;
 
 [TestClass]
-public sealed class InMemoryCacheTests
+public class InMemoryCacheTests
 {
     [TestMethod]
     public void Constructor_CapacityBelowMinimum_ThrowsArgumentOutOfRangeException()
