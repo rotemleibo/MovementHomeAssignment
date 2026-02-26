@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace MovementHomeAssignment.Infrastructure.DAL;
 
+/// <summary>
+/// EF Core implementation for user persistence.
+/// </summary>
 public class UserDal : IUserDal
 {
     private readonly ApplicationDbContext _context;
@@ -15,6 +18,9 @@ public class UserDal : IUserDal
         _context = context;
     }
 
+    /// <summary>
+    /// Persists a user to the database.
+    /// </summary>
     public async Task<User> CreateUserAsync(User user, CancellationToken cancellationToken = default)
     {
         await _context.Users.AddAsync(user, cancellationToken);
@@ -22,6 +28,9 @@ public class UserDal : IUserDal
         return user;
     }
 
+    /// <summary>
+    /// Fetches a user by identifier.
+    /// </summary>
     public async Task<User> GetUserByIdAsync(int id, CancellationToken cancellationToken = default)
     {
         return await _context.Users.FirstOrDefaultAsync(u => u.Id == id, cancellationToken);

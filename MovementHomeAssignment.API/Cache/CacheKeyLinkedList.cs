@@ -2,14 +2,23 @@
 
 namespace MovementHomeAssignment.API.Cache;
 
+/// <summary>
+/// Linked list that tracks LRU order by cache key.
+/// </summary>
 public class CacheKeyLinkedList
 {
     private Node head;
     private Node tail;
     private int count;
 
+    /// <summary>
+    /// Current number of keys tracked.
+    /// </summary>
     public int Count => count;
 
+    /// <summary>
+    /// Adds a key to the head (most-recently used).
+    /// </summary>
     public void AddFirst(int data)
     {
         Node newNode = new Node(data);
@@ -25,6 +34,9 @@ public class CacheKeyLinkedList
         count++;
     }
 
+    /// <summary>
+    /// Adds a key to the tail (least-recently used).
+    /// </summary>
     public void AddLast(int data)
     {
         Node newNode = new Node(data);
@@ -40,8 +52,14 @@ public class CacheKeyLinkedList
         count++;
     }
 
+    /// <summary>
+    /// Gets the least-recently used key.
+    /// </summary>
     public int Last => tail != null ? tail.Data : throw new InvalidOperationException("Empty");
 
+    /// <summary>
+    /// Removes the least-recently used key.
+    /// </summary>
     public void RemoveLast()
     {
         if (head == null)
@@ -62,6 +80,9 @@ public class CacheKeyLinkedList
         count--;
     }
 
+    /// <summary>
+    /// Removes a key if it exists.
+    /// </summary>
     public bool Remove(int data)
     {
         if (head == null)

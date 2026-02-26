@@ -8,12 +8,16 @@ using System.Threading.Tasks;
 
 namespace MovementHomeAssignment.API.Services;
 
+/// <summary>
+/// Coordinates user operations and the multi-layer cache strategy.
+/// </summary>
 public class UserService : IUserService
 {
     private readonly ICacheService _cacheService;
     private readonly IUserDal _userDal;
     private readonly IUserConverter _userConverter;
     private readonly InMemoryCache<UserDto> _inMemoryCache;
+
     public UserService(
         IUserDal userDal,
         IUserConverter userConverter,
@@ -26,6 +30,9 @@ public class UserService : IUserService
         _inMemoryCache = inMemoryCache;
     }
 
+    /// <summary>
+    /// Persists a user and returns the created identifier.
+    /// </summary>
     public async Task<int> CreateUser(UserDto userDto)
     {
         var createdUser = await _userDal.CreateUserAsync(_userConverter.ToUser(userDto));
@@ -33,6 +40,9 @@ public class UserService : IUserService
         return createdUser.Id;
     }
 
+    /// <summary>
+    /// Resolves a user via Redis, then in-memory cache, then database.
+    /// </summary>
     public async Task<UserDto> GetUserById(int id, CancellationToken cancellationToken)
     {
         var userDto = await _cacheService.GetAsync<UserDto>(id.ToString(), cancellationToken);

@@ -3,6 +3,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MovementHomeAssignment.API;
 using MovementHomeAssignment.Infrastructure;
+using System;
+using System.IO;
+using System.Reflection;
 
 namespace MovementHomeAssignment;
 
@@ -15,7 +18,12 @@ public class Program
         // Add services to the container.
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen();
+        builder.Services.AddSwaggerGen(options =>
+        {
+            var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+            options.IncludeXmlComments(xmlPath);
+        });
 
         // Add Infrastructure Services
         builder.Services.AddInMemoryCaches(configuration);

@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace MovementHomeAssignment.API.InMemory;
 
+/// <summary>
+/// In-memory LRU cache optimized for fast lookups.
+/// </summary>
 public class InMemoryCache<T>
     where T : class
 {
@@ -29,6 +32,9 @@ public class InMemoryCache<T>
         _linkedList = new CacheKeyLinkedList();
     }
 
+    /// <summary>
+    /// Retrieves a cached value and updates LRU ordering.
+    /// </summary>
     public T Get(int key)
     {
         lock (_cacheLock)
@@ -42,6 +48,9 @@ public class InMemoryCache<T>
         return null;
     }
 
+    /// <summary>
+    /// Inserts or replaces a cached value and evicts when at capacity.
+    /// </summary>
     public void Set(int key, T value)
     {
         lock (_cacheLock)
@@ -65,6 +74,9 @@ public class InMemoryCache<T>
         }
     }
 
+    /// <summary>
+    /// Updates the key to be most-recently used.
+    /// </summary>
     private void UpdateLeastRecentlyUsed(int key)
     {
         _linkedList.Remove(key);
