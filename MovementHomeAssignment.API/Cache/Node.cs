@@ -14,10 +14,14 @@ public class Node
     /// Next node reference.
     /// </summary>
     public Node Next;
+    
+    /// <summary>
+    /// Previous node reference.
+    /// </summary>
+    public Node Previous { get; set; }
 
     public Node(int data)
     {
         Data = data;
-        Next = null;
     }
 }

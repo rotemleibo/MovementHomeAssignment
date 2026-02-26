@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace MovementHomeAssignment.API.Cache;
 
@@ -10,6 +11,7 @@ public class CacheKeyLinkedList
     private Node head;
     private Node tail;
     private int count;
+    private readonly Dictionary<int, Node> nodeMap = new();
 
     /// <summary>
     /// Current number of keys tracked.
@@ -29,8 +31,10 @@ public class CacheKeyLinkedList
         else
         {
             newNode.Next = head;
+            head.Previous = newNode;
             head = newNode;
         }
+        nodeMap[data] = newNode;
         count++;
     }
 
@@ -47,8 +51,10 @@ public class CacheKeyLinkedList
         else
         {
             tail.Next = newNode;
+            newNode.Previous = tail;
             tail = newNode;
         }
+        nodeMap[data] = newNode;
         count++;
     }
 
@@ -68,52 +74,49 @@ public class CacheKeyLinkedList
         }
         if (head == tail)
         {
+            nodeMap.Remove(tail.Data);
             head = tail = null;
         }
         else
         {
-            Node current = head;
-            while (current.Next != tail) current = current.Next;
-            current.Next = null;
-            tail = current;
+            nodeMap.Remove(tail.Data);
+            tail = tail.Previous;
+            tail.Next = null;
         }
         count--;
     }
 
     /// <summary>
-    /// Removes a key if it exists.
+    /// Removes a key if it exists. O(1) operation.
     /// </summary>
     public bool Remove(int data)
     {
-        if (head == null)
+        if (!nodeMap.TryGetValue(data, out Node node))
         {
             return false;
         }
-        if (head.Data == data)
-        {
-            if (head == tail)
-            {
-                tail = null;
-            }
 
-            head = head.Next;
-            count--;
-            return true;
+        if (node.Previous != null)
+        {
+            node.Previous.Next = node.Next;
+        }
+        else
+        {
+            head = node.Next;
         }
 
-        Node current = head;
-        while (current.Next != null && current.Next.Data != data)
+        if (node.Next != null)
         {
-            current = current.Next;
+            node.Next.Previous = node.Previous;
+        }
+        else
+        {
+            tail = node.Previous;
         }
 
-        if (current.Next != null)
-        {
-            if (current.Next == tail) tail = current;
-            current.Next = current.Next.Next;
-            count--;
-            return true;
-        }
-        return false;
+        nodeMap.Remove(data);
+        count--;
+
+        return true;
     }
 }
