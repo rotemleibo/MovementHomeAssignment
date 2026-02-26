@@ -18,6 +18,8 @@ cd MovementHomeAssignment
 
 ### 2. Start the dependencies (MySQL and Redis)
 
+Make sure **Docker Desktop is running** before executing the following command (on Windows, open Docker Desktop from the Start Menu and wait until it is fully started).
+
 ```bash
 docker compose up -d
 ```
