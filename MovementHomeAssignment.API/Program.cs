@@ -22,7 +22,7 @@ public class Program
         builder.Services.AddRedis(configuration);
         builder.Services.AddMySql(configuration);
         builder.Services.AddServices();
-        builder.Services.AddConnections();
+        builder.Services.AddConverters();
 
         var app = builder.Build();
 
