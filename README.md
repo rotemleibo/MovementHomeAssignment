@@ -32,8 +32,13 @@ This starts:
 dotnet run --project MovementHomeAssignment.API/MovementHomeAssignment.API.csproj
 ```
 
-The API will be available at `https://localhost:5001` (or `http://localhost:5000`).  
-Swagger UI is available at `https://localhost:5001/swagger` when running in Development mode.
+The API will be available at `https://localhost:7162` (or `http://localhost:5018`).  
+Swagger UI is available at `http://localhost:5018/swagger/index.html` when running in Development mode.
+
+```bash for Development mode
+set ASPNETCORE_ENVIRONMENT=Development
+dotnet run --project MovementHomeAssignment.API/MovementHomeAssignment.API.csproj
+```
 
 ### 4. Configuration
 
