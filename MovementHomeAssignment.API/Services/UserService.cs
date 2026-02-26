@@ -18,6 +18,14 @@ public class UserService : IUserService
     private readonly IUserConverter _userConverter;
     private readonly InMemoryCache<UserDto> _inMemoryCache;
 
+
+    /// <summary>
+    /// Initializes a new instance of the UserService class.
+    /// </summary>
+    /// <param name="userDal">The data access layer for user database operations.</param>
+    /// <param name="userConverter">The converter for transforming between User and UserDto objects.</param>
+    /// <param name="cacheService">The distributed cache service for remote caching.</param>
+    /// <param name="inMemoryCache">The in-memory LRU cache for local caching.</param>
     public UserService(
         IUserDal userDal,
         IUserConverter userConverter,

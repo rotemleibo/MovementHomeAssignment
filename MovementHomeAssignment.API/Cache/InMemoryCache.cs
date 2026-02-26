@@ -20,6 +20,11 @@ public class InMemoryCache<T>
     private readonly Dictionary<int, T> _cache;
     private readonly CacheKeyLinkedList _linkedList;
 
+    /// <summary>
+    /// Initializes a new instance of the InMemoryCache class with the specified capacity options.
+    /// </summary>
+    /// <param name="options">Configuration options containing the cache capacity.</param>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown when capacity is less than MinCapacity or greater than MaxCapacity.</exception>
     public InMemoryCache(IOptions<InMemoryCacheOptions> options)
     {
         if (options.Value.Capacity < MinCapacity || options.Value.Capacity > MaxCapacity)

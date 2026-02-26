@@ -17,6 +17,11 @@ public sealed class RedisCacheService : ICacheService
     private readonly IDistributedCache _cache;
     private readonly RedisOptions _options;
 
+    /// <summary>
+    /// Initializes a new instance of the RedisCacheService class.
+    /// </summary>
+    /// <param name="cache">The distributed cache provider for Redis operations.</param>
+    /// <param name="options">The configuration options containing Redis settings such as TTL.</param>
     public RedisCacheService(IDistributedCache cache, IOptions<RedisOptions> options)
     {
         _cache = cache;
